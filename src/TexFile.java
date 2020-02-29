@@ -133,7 +133,10 @@ public class TexFile {
             StateVariable stateVariable;
             for (int i = 0; i < module.semantics.stateVariables.length; i++) {
                 stateVariable = module.semantics.stateVariables[i];
-                moduleText += "\n" + stateVariable.identifier + ": " + stateVariable.text + "\\\\";
+                moduleText += "\n" + stateVariable.identifier + ": " + stateVariable.text;
+                if (i != module.semantics.stateVariables.length - 1) {
+                    moduleText += "\\\\";
+                }
             }
         }
 
