@@ -1,0 +1,2 @@
+- Different GUIs may be used.
+- Style of documentation generated.

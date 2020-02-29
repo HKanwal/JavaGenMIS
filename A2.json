@@ -1,0 +1,517 @@
+[
+    {
+        "name": "Chemistry Types",
+        "classes": [],
+        "inherits": "",
+        "is": "",
+        "definition": "ChemTypes",
+        "uses": [],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": [
+                "ElementT = { H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe, Cs, Ba, La, Ce, Pr, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu, Hf, Ta, W, Re, Os, Ir, Pt, Au, Hg, Tl, Pb, Bi, Po, At, Rn, Fr, Ra, Ac, Th, Pa, U, Np, Pu, Am, Cm, Bk, Cf, Es, Fm, Md, No, Lr, Rf, Db, Sg, Bh, Hs, Mt, Ds, Rg, Cn, Nh, Fl, Mc, Lv, Ts, Og }"
+            ],
+            "accessPrograms": []
+        },
+        "semantics": {
+            "stateVariables": [],
+            "stateInvariants": [],
+            "assumptions": [],
+            "acessRoutines": []
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "Chemistry Interface",
+        "classes": ["Interface"],
+        "inherits": "",
+        "is": "",
+        "definition": "ChemEntity",
+        "uses": ["ChemTypes", "ElmSet"],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": [],
+            "accessPrograms": [
+                {
+                    "name": "num_atoms",
+                    "in": "ElementT",
+                    "out": "\\N",
+                    "exceptions": ""
+                },
+                {
+                    "name": "constit_elems",
+                    "in": "",
+                    "out": "ElmSet",
+                    "exceptions": ""
+                }
+            ]
+        },
+        "semantics": {
+            "stateVariables": [],
+            "stateInvariants": [],
+            "assumptions": [],
+            "accessRoutines": []
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "Equality Interface",
+        "classes": ["Interface", "Generic"],
+        "inherits": "",
+        "is": "",
+        "definition": "Equality(T)",
+        "uses": [],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": [],
+            "accessPrograms": [
+                {
+                    "name": "equals",
+                    "in": "T",
+                    "out": "\\B",
+                    "exceptions": ""
+                }
+            ]
+        },
+        "semantics": {
+            "stateVariables": [],
+            "stateInvariants": [],
+            "assumptions": [],
+            "accessRoutines": []
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "Generic Set",
+        "classes": ["Template", "Generic"],
+        "inherits": "Equality(Set(T))",
+        "is": "",
+        "definition": "Set(T with Equality(T))",
+        "uses": ["Equality"],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": ["Set(T) = ?"],
+            "accessPrograms": [
+                {
+                    "name": "new Set",
+                    "in": "seq of T",
+                    "out": "Set(T)",
+                    "exceptions": ""
+                },
+                {
+                    "name": "add",
+                    "in": "T",
+                    "out": "",
+                    "exceptions": ""
+                },
+                {
+                    "name": "rm",
+                    "in": "T",
+                    "out": "",
+                    "exceptions": "ValueError"
+                },
+                {
+                    "name": "member",
+                    "in": "T",
+                    "out": "\\B",
+                    "exceptions": ""
+                },
+                {
+                    "name": "size",
+                    "in": "",
+                    "out": "\\N",
+                    "exceptions": ""
+                },
+                {
+                    "name": "to_seq",
+                    "in": "",
+                    "out": "seq of T",
+                    "exceptions": ""
+                }
+            ]
+        },
+        "semantics": {
+            "stateVariables": [
+                {
+                    "identifier": "S",
+                    "text": "set of T"
+                }
+            ],
+            "stateInvariants": [],
+            "assumptions": ["The Set(T) constructor is called for each object instance before any other access routine is called for that object.  The constructor can only be called once."],
+            "accessRoutines": [
+                {
+                    "name": "new Set(s)",
+                    "transition": "S := {e:T|e\\in s:e}",
+                    "output": "out := self",
+                    "exception": "none"
+                },
+                {
+                    "name": "add(e)",
+                    "transition": "S := S\\union {e}",
+                    "output": "",
+                    "exception": "none"
+                },
+                {
+                    "name": "rm(e)",
+                    "transition": "S := S - {e}",
+                    "output": "",
+                    "exception": "none"
+                },
+                {
+                    "name": "member(e)",
+                    "transition": "",
+                    "output": "e\\in S",
+                    "exception": "none"
+                },
+                {
+                    "name": "size()",
+                    "transition": "",
+                    "output": "out := |S|",
+                    "exception": "none"
+                },
+                {
+                    "name": "equals(R)",
+                    "transition": "",
+                    "output": "out := (\\forall e:T|e\\in S:R.\\txt{member}(e))\\land (R.\\txt{size}()=|S|)",
+                    "exception": "none"
+                },
+                {
+                    "name": "to_seq()",
+                    "transition": "",
+                    "output": "out := \\langle e:T|e\\in S:e\\rangle",
+                    "exception": "none"
+                }
+            ]
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "ElementSet",
+        "classes": ["Template"],
+        "inherits": "",
+        "is": "Set(ElementT)",
+        "definition": "ElmSet is Set(ElementT)",
+        "uses": [],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": [],
+            "accessPrograms": []
+        },
+        "semantics": {
+            "stateVariables": [],
+            "stateInvariants": [],
+            "assumptions": [],
+            "accessRoutines": []
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "MoleculeSet",
+        "classes": ["Template"],
+        "inherits": "",
+        "is": "Set(MoleculeT)",
+        "definition": "MolecSet is Set(MoleculeT)",
+        "uses": [],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": [],
+            "accessPrograms": []
+        },
+        "semantics": {
+            "stateVariables": [],
+            "stateInvariants": [],
+            "assumptions": [],
+            "accessRoutines": []
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "MoleculeT",
+        "classes": ["Template"],
+        "inherits": "ChemEntity, Equality(MoleculeT)",
+        "is": "",
+        "definition": "MoleculeT",
+        "uses": ["ChemTypes", "ChemEntity", "Equality", "ElmSet"],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": ["MoleculeT = ?"],
+            "accessPrograms": [
+                {
+                    "name": "new MoleculeT",
+                    "in": "\\N, ElementT",
+                    "out": "MoleculeT",
+                    "exceptions": ""
+                },
+                {
+                    "name": "get_elm",
+                    "in": "",
+                    "out": "ElementT",
+                    "exceptions": ""
+                },
+                {
+                    "name": "get_num",
+                    "in": "",
+                    "out": "\\N",
+                    "exceptions": ""
+                }
+            ]
+        },
+        "semantics": {
+            "stateVariables": [
+                {
+                    "identifier": "num",
+                    "text": "elm"
+                },
+                {
+                    "identifier": "elm",
+                    "text": "ElementT"
+                }
+            ],
+            "stateInvariants": [],
+            "assumptions": [],
+            "accessRoutines": [
+                {
+                    "name": "new MoleculeT(n, e)",
+                    "transition": "num, elm := n, e",
+                    "output": "out := self",
+                    "exception": "none"
+                },
+                {
+                    "name": "get_num()",
+                    "transition": "",
+                    "output": "out := num",
+                    "exception": "none"
+                },
+                {
+                    "name": "get_elm()",
+                    "transition": "",
+                    "output": "out := elm",
+                    "exception": "none"
+                },
+                {
+                    "name": "num_atoms(e)",
+                    "transition": "",
+                    "output": "out := (e=elm\\implies num|e\\neq elm\\implies 0)",
+                    "exception": "none"
+                },
+                {
+                    "name": "constit_elems()",
+                    "transition": "",
+                    "output": "out := \\txt{\\langle elm\\rangle}",
+                    "exception": "none"
+                },
+                {
+                    "name": "equals(m)",
+                    "transition": "",
+                    "output": "out := (elm=m.\\txt{get_elm}())\\land (num=m.\\txt{get_num}())",
+                    "exception": "none"
+                }
+            ]
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "CompoundT",
+        "classes": ["Template"],
+        "inherits": "ChemEntity, Equality(CompoundT)",
+        "is": "",
+        "definition": "CompoundT",
+        "uses": ["MoleculeT", "ChemEntity", "Equality", "ElmSet", "MolecSet"],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": ["CompoundT = ?"],
+            "accessPrograms": [
+                {
+                    "name": "new CompoundT",
+                    "in": "MolecSet",
+                    "out": "CompoundT",
+                    "exceptions": ""
+                },
+                {
+                    "name": "get_molec_set",
+                    "in": "",
+                    "out": "MolecSet",
+                    "exceptions": ""
+                }
+            ]
+        },
+        "semantics": {
+            "stateVariables": [
+                {
+                    "identifier": "C",
+                    "text": "MolecSet"
+                }
+            ],
+            "stateInvariants": [],
+            "assumptions": [],
+            "accessRoutines": [
+                {
+                    "name": "new CompoundT(M)",
+                    "transition": "C := M",
+                    "output": "out := self",
+                    "exception": "none"
+                },
+                {
+                    "name": "get_molec_set()",
+                    "transition": "",
+                    "output": "out := C",
+                    "exception": "none"
+                },
+                {
+                    "name": "num_atoms(e)",
+                    "transition": "",
+                    "output": "out := (+m:\\txt{MoleculeT}|m\\in C.\\txt{to_seq}():m.\\txt{num_atoms}(e))",
+                    "exception": "none"
+                },
+                {
+                    "name": "constit_elems()",
+                    "transition": "",
+                    "output": "out := \\txt{ElmSet}(\\langle m:\\txt{MoleculeT}|m\\in C.\\txt{to_seq}():m.\\txt{get_elm}()\\rangle)",
+                    "exception": "none"
+                },
+                {
+                    "name": "equals(D)",
+                    "transition": "",
+                    "output": "out := C.\\txt{equals}(D.\\txt{get_molec_set}())",
+                    "exception": "none"
+                }
+            ]
+        },
+        "localFunctions": [],
+        "considerations": ""
+    },
+    {
+        "name": "ReactionT",
+        "classes": ["Template"],
+        "inherits": "",
+        "is": "",
+        "definition": "ReactionT",
+        "uses": ["ChemTypes", "CompoundT"],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": ["ReactionT = ?"],
+            "accessPrograms": [
+                {
+                    "name": "new ReactionT",
+                    "in": "seq of CompoundT, seq of CompoundT",
+                    "out": "ReactionT",
+                    "exceptions": "ValueError"
+                },
+                {
+                    "name": "get_lhs",
+                    "in": "",
+                    "out": "seq of CompoundT",
+                    "exceptions": ""
+                },
+                {
+                    "name": "get_rhs",
+                    "in": "",
+                    "out": "seq of CompoundT",
+                    "exceptions": ""
+                },
+                {
+                    "name": "get_lhs_coeff",
+                    "in": "",
+                    "out": "seq of \\R",
+                    "exceptions": ""
+                },
+                {
+                    "name": "get_rhs_coeff",
+                    "in": "",
+                    "out": "seq of \\R",
+                    "exceptions": ""
+                }
+            ]
+        },
+        "semantics": {
+            "stateVariables": [
+                {
+                    "identifier": "lhs",
+                    "text": "seq of CompoundT"
+                },
+                {
+                    "identifier": "rhs",
+                    "text": "seq of CompoundT"
+                },
+                {
+                    "identifier": "coeff\\_{L}",
+                    "text": "seq of \\R"
+                },
+                {
+                    "identifier": "coeff\\_{R}",
+                    "text": "seq of \\R"
+                }
+            ],
+            "stateInvariants": [
+                "|lhs|=|coeff\\_{L}|",
+                "|rhs|=|coeff\\_{R}|",
+                "\\txt{pos}(coeff\\_{L})",
+                "\\txt{pos}(coeff\\_{R})"
+            ],
+            "assumptions": [],
+            "accessRoutines": [
+                {
+                    "name": "new ReactionT(L, R)",
+                    "transition": "lhs, rhs, coeff\\_{L}, coeff\\_{R} := L, R, coeff\\_{L}\\^{*}, coeff\\_{R}\\^{*}\\txt{such that is_balanced }(L, R, coeff\\_{L}\\^{*}, coeff\\_{R}\\^{*})",
+                    "output": "out := self",
+                    "exception": "\\lnot((\\exists coeff\\_{L}\\^{*},coeff\\_{R}\\^{*}:seq of \\R|:\\txt{is_balanced}(L, R, coeff\\_{L}\\^{*}, coeff\\_{R}\\^{*}))\\land\\txt{pos}(coeff\\_{L}\\^{*})\\land\\txt{pos}(coeff\\_{R}\\^{*}))\\implies \\txt{ValueError}"
+                },
+                {
+                    "name": "get_lhs()",
+                    "transition": "",
+                    "output": "out := lhs",
+                    "exception": "none"
+                },
+                {
+                    "name": "get_rhs()",
+                    "transition": "",
+                    "output": "out := rhs",
+                    "exception": "none"
+                },
+                {
+                    "name": "get_lhs_coeff()",
+                    "transition": "",
+                    "output": "out := coeff\\_{L}\\^{*}",
+                    "exception": "none"
+                },
+                {
+                    "name": "get_rhs_coeff()",
+                    "transition": "",
+                    "output": "out := coeff\\_{R}\\^{*}",
+                    "exception": "none"
+                }
+            ]
+        },
+        "localFunctions": [
+            {
+                "signature": "\\txt{pos}:\\txt{seq of }\\R\\rightarrow\\B",
+                "definition": "\\txt{pos}(s)\\equiv(\\forall i:\\N |i\\in [0..|s|-1]:s[i]>0)"
+            },
+            {
+                "signature": "\\txt{n_atoms}:\\txt{seq of CompoundT}\\times \\txt{seq of }\\R\\times\\txt{ElementT}\\rightarrow\\N",
+                "definition": "\\txt{n_atoms}(C, c, e)\\equiv(+i:\\N |i\\in [0..|C|-1]:c[i]*C[i].\\txt{num_atoms}(e))"
+            },
+            {
+                "signature": "\\txt{elem_in_chem_eq}:\\txt{seq of CompoundT}\\rightarrow\\txt{set of ElementT}",
+                "definition": "\\txt{n_atoms}(C, c, e)\\equiv(\\union e:\\txt{CompoundT}|c\\in C:c.\\txt{constit_elems}())"
+            },
+            {
+                "signature": "\\txt{is_bal_elm}:\\txt{seq of CompoundT}\\times \\txt{seq of CompoundT}\\times\\txt{seq of }\\R\\times\\txt{seq of }\\R\\times\\txt{ElementT}\\rightarrow\\B",
+                "definition": "\\txt{is_bal_elm}(L, R, c\\_{L}, c\\_{R}, e)\\equiv\\txt{n_atoms}(L, c\\_{L}, e)=\\txt{n_atoms}(R, C\\_{R}, e)"
+            },
+            {
+                "signature": "\\txt{is_balanced}:\\txt{seq of CompoundT}\\times \\txt{seq of CompoundT}\\times\\txt{seq of R}\\times{seq of R}\\rightarrow\\B",
+                "definition": "\\txt{n_atoms}(C, c, e)\\equiv(\\txt{elm_in_chem_eq}(L)=\\txt{elm_in_chem_eq}(R))\\land(\\forall e:\\txt{ElementT}|e\\in\\txt{elm_in_chem_eq}(L):\\txt{is_bal_elm}(L, R, c\\_{L}, c\\_{R}, e))"
+            }
+        ],
+        "considerations": ""
+    }
+]
