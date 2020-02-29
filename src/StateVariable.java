@@ -1,8 +1,8 @@
 package src;
 
 public class StateVariable {
-    private String identifier;
-    private String text;
+    public String identifier;
+    public String text;
 
     public StateVariable() {}
 }

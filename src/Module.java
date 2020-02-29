@@ -4,17 +4,22 @@ import src.Syntax;
 import src.Semantics;
 import src.LocalFunction;
 
+
+/**
+ * Represents a MIS module. Obtained by parsing JSON.
+ * @author Harkeerat Kanwal
+ */
 public class Module {
-    private String name;
-    private String[] classes;
-    private String inherits;
-    private String is;
-    private String definition;
-    private String[] uses;
-    private Syntax syntax;
-    private Semantics semantics;
-    private LocalFunction[] localFunctions;
-    private String considerations;
+    public String name;
+    public String[] classes;
+    public String inherits;
+    public String is;
+    public String definition;
+    public String[] uses;
+    public Syntax syntax;
+    public Semantics semantics;
+    public LocalFunction[] localFunctions;
+    public String considerations;
 
     public Module() {}
 }

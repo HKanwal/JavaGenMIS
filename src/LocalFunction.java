@@ -1,8 +1,8 @@
 package src;
 
 public class LocalFunction {
-    private String signature;
-    private String definition;
+    public String signature;
+    public String definition;
 
     public LocalFunction() {}
 }
