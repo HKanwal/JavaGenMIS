@@ -20,4 +20,8 @@ public class Syntax {
     public boolean hasAccessPrograms() {
         return accessPrograms.length > 0;
     }
+
+    public boolean isEmpty() {
+        return !(hasExportedConstants() || hasExportedTypes() || hasAccessPrograms());
+    }
 }
