@@ -1,8 +1,16 @@
 package src;
 
 public class LocalFunction {
-    public String signature;
-    public String definition;
+    private String signature;
+    private String definition;
 
     public LocalFunction() {}
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public String getDefinition() {
+        return definition;
+    }
 }

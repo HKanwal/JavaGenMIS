@@ -1,22 +1,38 @@
 package src;
 
 public class AccessRoutine {
-    public String name;
-    public String transition;
-    public String output;
-    public String exception;
+    private String name;
+    private String transition;
+    private String output;
+    private String exception;
 
     public AccessRoutine() {}
 
     public boolean hasTransition() {
-        return this.transition.length() > 0;
+        return transition.length() > 0;
     }
 
     public boolean hasOutput() {
-        return this.output.length() > 0;
+        return output.length() > 0;
     }
 
     public boolean hasException() {
-        return this.exception.length() > 0;
+        return exception.length() > 0 && !(exception.equals("none") || exception.equals("None"));
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTransition() {
+        return transition;
+    }
+
+    public String getOutput() {
+        return output;
+    }
+
+    public String getException() {
+        return exception;
     }
 }
