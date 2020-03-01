@@ -1,0 +1,47 @@
+[
+    {
+        "name": "",
+        "classes": ["Generic", "Template", "Interface"],
+        "inherits": "",
+        "is": "",
+        "definition": "",
+        "uses": [],
+        "syntax": {
+            "exportedConstants": [],
+            "exportedTypes": [],
+            "accessPrograms": [
+                {
+                    "name": "",
+                    "in": "",
+                    "out": "",
+                    "exceptions": ""
+                }
+            ]
+        },
+        "semantics": {
+            "stateVariables": [
+                {
+                    "identifier": "",
+                    "text": ""
+                }
+            ],
+            "stateInvariants": [],
+            "assumptions": [],
+            "accessRoutines": [
+                {
+                    "name": "",
+                    "transition": "",
+                    "output": "",
+                    "exception": ""
+                }
+            ]
+        },
+        "localFunctions": [
+            {
+                "signature": "",
+                "definition": ""
+            }
+        ],
+        "considerations": ""
+    }
+]
