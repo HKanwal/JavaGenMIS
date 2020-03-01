@@ -1,5 +1,7 @@
 testClass = TestClass
 
+all: default run open
+
 default:
 	javac -g -d bin/ -cp .:lib/gson-2.8.6.jar src/$(testClass).java
 
@@ -11,5 +13,5 @@ open:
 	okular tex/MIS.pdf
 
 clean:
-	rm bin/*
+	rm -r bin/*
 	rm tex/*
