@@ -9,7 +9,7 @@
         "syntax": {
             "exportedConstants": [],
             "exportedTypes": [
-                "ElementT = { H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe, Cs, Ba, La, Ce, Pr, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu, Hf, Ta, W, Re, Os, Ir, Pt, Au, Hg, Tl, Pb, Bi, Po, At, Rn, Fr, Ra, Ac, Th, Pa, U, Np, Pu, Am, Cm, Bk, Cf, Es, Fm, Md, No, Lr, Rf, Db, Sg, Bh, Hs, Mt, Ds, Rg, Cn, Nh, Fl, Mc, Lv, Ts, Og }"
+                "ElementT = \\{ H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe, Cs, Ba, La, Ce, Pr, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu, Hf, Ta, W, Re, Os, Ir, Pt, Au, Hg, Tl, Pb, Bi, Po, At, Rn, Fr, Ra, Ac, Th, Pa, U, Np, Pu, Am, Cm, Bk, Cf, Es, Fm, Md, No, Lr, Rf, Db, Sg, Bh, Hs, Mt, Ds, Rg, Cn, Nh, Fl, Mc, Lv, Ts, Og \\}"
             ],
             "accessPrograms": []
         },
@@ -492,26 +492,26 @@
         },
         "localFunctions": [
             {
-                "signature": "\\text{pos}:\\text{seq of }\\mathbb{R}ightarrow\\mathbb{B}",
-                "definition": "\\text{pos}(s)\\equiv(\\forall i:\\mathbb{N} |i\\in [0..|s|-1]:s[i]>0)"
+                "signature": "$\\text{pos}:\\text{seq of }\\mathbb{R}\\rightarrow\\mathbb{B}$",
+                "definition": "$\\text{pos}(s)\\equiv(\\forall i:\\mathbb{N} |i\\in [0..|s|-1]:s[i]>0)$"
             },
             {
-                "signature": "\\text{n\\_atoms}:\\text{seq of CompoundT}\\times \\text{seq of }\\mathbb{R}\\times\\text{ElementT}\\mathbb{R}ightarrow\\mathbb{N}",
-                "definition": "\\text{n\\_atoms}(C, c, e)\\equiv(+i:\\mathbb{N} |i\\in [0..|C|-1]:c[i]*C[i].\\text{num\\_atoms}(e))"
+                "signature": "$\\text{n\\_atoms}:\\text{seq of CompoundT}\\times \\text{seq of }\\mathbb{R}\\times\\text{ElementT}\\rightarrow\\mathbb{N}$",
+                "definition": "$\\text{n\\_atoms}(C, c, e)\\equiv(+i:\\mathbb{N} |i\\in [0..|C|-1]:c[i]*C[i].\\text{num\\_atoms}(e))$"
             },
             {
-                "signature": "\\text{elem_in_chem_eq}:\\text{seq of CompoundT}\\mathbb{R}ightarrow\\text{set of ElementT}",
-                "definition": "\\text{n\\_atoms}(C, c, e)\\equiv(\\cup e:\\text{CompoundT}|c\\in C:c.\\text{constit\\_elems}())"
+                "signature": "$\\text{elem\\_in\\_chem\\_eq}:\\text{seq of CompoundT}\\rightarrow\\text{set of ElementT}$",
+                "definition": "$\\text{n\\_atoms}(C, c, e)\\equiv(\\cup e:\\text{CompoundT}|c\\in C:c.\\text{constit\\_elems}())$"
             },
             {
-                "signature": "\\text{is_bal_elm}:\\text{seq of CompoundT}\\times \\text{seq of CompoundT}\\times\\text{seq of }\\mathbb{R}\\times\\text{seq of }\\mathbb{R}\\times\\text{ElementT}\\mathbb{R}ightarrow\\mathbb{B}",
-                "definition": "\\text{is_bal_elm}(L, R, c_{L}, c_{R}, e)\\equiv\\text{n\\_atoms}(L, c_{L}, e)=\\text{n\\_atoms}(R, C_{R}, e)"
+                "signature": "$\\text{is\\_bal\\_elm}:\\text{seq of CompoundT}\\times \\text{seq of CompoundT}\\times\\text{seq of }\\mathbb{R}\\times\\text{seq of }\\mathbb{R}\\times\\text{ElementT}\\rightarrow\\mathbb{B}$",
+                "definition": "$\\text{is\\_bal\\_elm}(L, R, c_{L}, c_{R}, e)\\equiv\\text{n\\_atoms}(L, c_{L}, e)=\\text{n\\_atoms}(R, C_{R}, e)$"
             },
             {
-                "signature": "\\text{is\\_balanced}:\\text{seq of CompoundT}\\times \\text{seq of CompoundT}\\times\\text{seq of R}\\times{seq of R}\\mathbb{R}ightarrow\\mathbb{B}",
-                "definition": "\\text{n\\_atoms}(C, c, e)\\equiv(\\text{elm_in_chem_eq}(L)=\\text{elm_in_chem_eq}(R))\\land(\\forall e:\\text{ElementT}|e\\in\\text{elm_in_chem_eq}(L):\\text{is_bal_elm}(L, R, c_{L}, c_{R}, e))"
+                "signature": "$\\text{is\\_balanced}:\\text{seq of CompoundT}\\times \\text{seq of CompoundT}\\times\\text{seq of R}\\times{seq of R}\\rightarrow\\mathbb{B}$",
+                "definition": "$\\text{n\\_atoms}(C, c, e)\\equiv(\\text{elm\\_in\\_chem\\_eq}(L)=\\text{elm\\_in\\_chem\\_eq}(R))\\land(\\forall e:\\text{ElementT}|e\\in\\text{elm\\_in\\_chem\\_eq}(L):\\text{is\\_bal\\_elm}(L, R, c_{L}, c_{R}, e))$"
             }
         ],
-        "considerations": ""
+        "considerations": "Usually when balancing equations the assumption is that the balanced equation will have positive integer coefficients.  The requirements here are not that strict.  As long as the equation is balanced, positive real coefficients are fine.  Algorithms for balancing a chemical equation are based on building a linear system of equations, as described at \\url{https://www.nyu.edu/classes/tuckerman/adv.chem/lectures/lecture_2/node3.html} and \\url{https://www.nayuki.io/page/chemical-equation-balancer-javascript}."
     }
 ]
