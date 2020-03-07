@@ -1,12 +1,12 @@
-testClass = TestClass
+file = StartServer
 
-all: default run open
+all: build run open
 
-default:
-	javac -g -d bin/ -cp .:lib/gson-2.8.6.jar src/$(testClass).java
+build:
+	javac -g -d bin/ -cp .:lib/gson-2.8.6.jar src/$(file).java
 
 run:
-	java -cp 'bin/:lib/gson-2.8.6.jar' src.$(testClass)
+	java -cp 'bin/:lib/gson-2.8.6.jar' src/$(file)
 
 open:
 	cd tex && pdflatex MIS.tex
