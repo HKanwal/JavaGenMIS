@@ -1,7 +1,7 @@
 package src;
 
 import src.Module;
-import src.TexFile;
+import src.TexFileContents;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.File;
