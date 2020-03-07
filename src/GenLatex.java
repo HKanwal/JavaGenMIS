@@ -29,7 +29,21 @@ public class GenLatex {
 
         // Module title and definitions.
         text += "\n\n\\section*{" + module.getName() + " Module}";
-        text += "\n\n\\subsection*{Module}";
+        text += "\n\n\\subsection*{";
+        if (module.isGeneric()) {
+            text += "Generic ";
+        }
+        if (module.isTemplate()) {
+            text += "Template ";
+        }
+        if (module.isInterface()) {
+            text += "Interface ";
+        }
+        text += "Module";
+        if (module.inherits().length() > 0) {
+            text += " inherits " + module.inherits();
+        }
+        text += "}";
         text += "\n\n" + module.getDefinition();
 
         if (!(module.hasSuper() && module.getSyntax().isEmpty() && module.getSemantics().isEmpty())) {
