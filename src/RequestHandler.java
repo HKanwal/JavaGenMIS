@@ -14,6 +14,7 @@ public class RequestHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         String requestMethod = httpExchange.getRequestMethod();
         if (requestMethod.equals("POST")) {
+            System.out.println("Received POST request.");
             handlePostRequest(httpExchange);
         }
         else if (requestMethod.equals("GET")) {
@@ -26,6 +27,8 @@ public class RequestHandler implements HttpHandler {
         OutputStream outputStream = httpExchange.getResponseBody();
         Scanner scanner = new Scanner(inputStream);
         String json = scanner.hasNext() ? scanner.next() : "";
+        json = json.replaceAll("%20", " ");
+        System.out.println("JSON: " + json);
         Gson gson = new Gson();
         TexFile texFile = new TexFile("tex/temp.tex", gson.fromJson(json, Module[].class));
         String response = "Received";
