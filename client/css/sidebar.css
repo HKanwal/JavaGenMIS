@@ -1,0 +1,49 @@
+.container {
+    height: 100%;
+}
+.side-bar {
+    width: var(--side-bar-width);
+    height: 100%;
+    background-color: #f8f8f8;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    color: #333;
+    float: left;
+}
+.module-container {
+    height: 40px;
+    width: 200px;
+    padding-left: 10px;
+    margin: 0;
+}
+.new-button {
+    background-color: #337ab7;
+    border-radius: 50px;
+    text-decoration: none;
+    border: none;
+    margin-bottom: 20px;
+    height: 30px;
+    width: 30px;
+    color: white;
+    text-align: center;
+}
+.module-name {
+    margin: 0;
+    vertical-align: middle;
+    display: inline;
+    line-height: 40px;
+}
+.new-module-button {
+    margin-left: 10px;
+    margin-top: 8px;
+}
+.selected-module {
+    background-color: #e7e7e7;
+}
+.unselectable {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
+}
