@@ -67,7 +67,10 @@ class Form extends React.Component {
         for (let i = 1; i < this.state.usesValues.length; i++) {
             extraUses[i-1] = e(
                 "tr",
-                {key: i},
+                {
+                    key: i,
+                    
+                },
                 e(
                     "td",
                     {},
@@ -205,26 +208,91 @@ class Form extends React.Component {
                             null
                     ),
                     extraUses,
-                    e(
-                        "tr",
-                        {},
+                    (this.state.usesValues.length > 0) ?
                         e(
-                            "td",
+                            "tr",
                             {},
-                            ""
-                        ),
-                        e(
-                            "td",
-                            {},
-                            (this.state.usesValues.length > 0) ?
+                            e(
+                                "td",
+                                {},
+                                ""
+                            ),
+                            e(
+                                "td",
+                                {},
                                 e(
                                     NewButton,
                                     {
                                         click: () => this.addUses()
                                     }
                                 )
-                            :
-                                ""
+                            )
+                        )
+                    :
+                        null
+                    ,
+                    e(
+                        "tr",
+                        {},
+                        e(
+                            "td",
+                            {colSpan: "2"},
+                            e(
+                                "h2",
+                                {className: "subtitle"},
+                                "Syntax"
+                            )
+                        )
+                    ),
+                    e(
+                        "tr",
+                        {},
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "label",
+                                {className: "form-label"},
+                                "Exported Types:"
+                            )
+                        ),
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "input",
+                                {
+                                    type: "text",
+                                    size: "18"
+                                }
+                            ),
+                            " = "
+                        ),
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "textarea",
+                                {}
+                            )
+                        )
+                    ),
+                    e(
+                        "tr",
+                        {},
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "label",
+                                {className: "form-label"},
+                                "Access Programs:"
+                            )
+                        ),
+                        e(
+                            "td",
+                            {},
+                            e(NewButton)
                         )
                     ),
                     e(
@@ -235,12 +303,146 @@ class Form extends React.Component {
                             {colSpan: "2"},
                             e(
                                 "h2",
-                                {},
-                                "Syntax"
+                                {className: "subtitle"},
+                                "Semantics"
+                            )
+                        )
+                    ),
+                    e(
+                        "tr",
+                        {},
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "label",
+                                {className: "form-label"},
+                                "State Variables:"
+                            )
+                        ),
+                        e(
+                            "td",
+                            {},
+                            e(
+                                NewButton
+                            )
+                        )
+                    ),
+                    e(
+                        "tr",
+                        {},
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "label",
+                                {className: "form-label"},
+                                "State Invariants:"
+                            )
+                        ),
+                        e(
+                            "td",
+                            {},
+                            e(
+                                NewButton
+                            )
+                        )
+                    ),
+                    e(
+                        "tr",
+                        {},
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "label",
+                                {className: "form-label"},
+                                "Assumptions:"
+                            )
+                        ),
+                        e(
+                            "td",
+                            {},
+                            e(
+                                "textarea",
+                                {}
                             )
                         )
                     )
                 )
+            )
+        );
+    }
+}
+
+class Expandable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            entries: []
+        };
+        for (let i = 0; i < props.entries.length; i++) {
+            this.state.entries[i] = props.entries[i];
+        }
+        this.addEntry = this.addEntry.bind(this);
+        this.removeEntry = this.removeEntry.bind(this);
+    }
+
+    // handleChange(e) {
+    //     this.state
+    // }
+
+    addEntry() {
+        this.setState((state, props) => {
+            let newEntries = [...state.entries, ""];
+            props.update(newEntries);
+            return {
+                entries: newEntries
+            };
+        });
+    }
+
+    removeEntry(index) {
+        this.setState((state, props) => {
+            let newEntries = [...state.entries.slice(0,index), ...state.entries.slice(index+1)];
+            props.update(newEntries);
+            return {
+                entries: newEntries
+            };
+        });
+    }    
+    
+    render() {
+        return e(
+            "tr",
+            {},
+            e(
+                "td",
+                {},
+                e(
+                    "label",
+                    {className: "form-label"},
+                    this.props.label
+                )
+            ),
+            e(
+                "td",
+                {},
+                (this.state.entries.length === 0) ?
+                    e(
+                        NewButton,
+                        {
+                            click: () => this.props.addEntry()
+                        }
+                    )
+                :
+                    e(
+                        "input",
+                        {
+                            type: "text",
+                            id: 0
+                        }
+                    )
             )
         );
     }
