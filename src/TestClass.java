@@ -2,6 +2,7 @@ package src;
 
 import src.Module;
 import src.TexFileContents;
+import src.TexFile;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.File;
@@ -19,13 +20,6 @@ public class TestClass {
         }
         Gson gson = new Gson();
         Module[] modules = gson.fromJson(json, Module[].class);
-        TexFile texFile = new TexFile();
-        for (int i = 0; i < modules.length; i++) {
-            texFile.addModule(modules[i]);
-        }
-        File outputFile = new File("tex/MIS.tex");
-        FileWriter fr = new FileWriter(outputFile);
-        fr.write(texFile.getText());
-        fr.close();
+        TexFile texFile = new TexFile("tex/MIS.tex", gson.fromJson(json, Module[].class));
     }
 }

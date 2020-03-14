@@ -1,4 +1,4 @@
-file = StartServer
+file = TestClass
 
 all: build run open
 
