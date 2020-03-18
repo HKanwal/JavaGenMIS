@@ -4,7 +4,8 @@ class Form extends React.Component {
         this.state = {
             nameValue: props.currModule.name,
             defValue: props.currModule.definition,
-            usesValues: []
+            usesValues: [],
+            testValues: []
         };
         for (let i = 0; i < props.currModule.uses.length; i++) {
             this.state.usesValues[i] = props.currModule.uses[i];
@@ -14,6 +15,9 @@ class Form extends React.Component {
         this.handleUsesChange = this.handleUsesChange.bind(this);
         this.addUses = this.addUses.bind(this);
         this.removeUses = this.removeUses.bind(this);
+        this.addTest = this.addTest.bind(this);
+        this.removeTest = this.removeTest.bind(this);
+        this.updateTestValues = this.updateTestValues.bind(this);
     }
 
     handleNameChange(e) {
@@ -58,6 +62,32 @@ class Form extends React.Component {
             props.change(props.index, "uses", newUsesValues);
             return {
                 usesValues: newUsesValues
+            };
+        });
+    }
+
+    addTest() {
+        this.setState((state, props) => {
+            let newTestValues = [...state.testValues, ""];
+            return {
+                testValues: newTestValues
+            };
+        });
+    }
+
+    removeTest(index) {
+        this.setState((state, props) => {
+            let newTestValues = [...state.testValues.slice(0,index), ...state.testValues.slice(index+1)];
+            return {
+                testValues: newTestValues
+            };
+        });
+    }
+
+    updateTestValues(values) {
+        this.setState((state, props) => {
+            return {
+                testValues: values
             };
         });
     }
@@ -368,6 +398,15 @@ class Form extends React.Component {
                                 {}
                             )
                         )
+                    ),
+                    e(
+                        Expandable,
+                        {
+                            label: "TestList",
+                            update: this.updateTestValues,
+                            addEntry: this.addTest,
+                            entries: []
+                        }
                     )
                 )
             )
@@ -375,6 +414,15 @@ class Form extends React.Component {
     }
 }
 
+/**
+ * A form component (table row) with two columns. The left column is the label. Right column is an "Add Input"
+ * button. Pressing the button will create a new row, move the button to the second column of the new row, and
+ * put in its place a text input box. Indefinitely many new input boxes can be created.
+ * 
+ * @prop entries An array of strings representing entry values.
+ * @prop label A string label for the field.
+ * @prop addEntry A function expecting no arguments. 
+ */
 class Expandable extends React.Component {
     constructor(props) {
         super(props);
