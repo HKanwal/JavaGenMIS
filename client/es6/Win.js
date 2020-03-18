@@ -9,7 +9,7 @@ class Win extends React.Component {
                 {
                     name: "New Module",
                     definition: "",
-                    uses: []
+                    uses: ""
                 }
             ],
             currentSelected: 0
